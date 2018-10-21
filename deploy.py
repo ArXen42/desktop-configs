@@ -14,17 +14,13 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
-symlinks = [
-    (Path("root/home/user/.config/awesome"), Path.home().joinpath(Path(".config/awesome")))
-]
-
-
 def create_or_update_symlink(target, link):
     print("Creating " + str(link) + " -> " + str(target))
 
     try:
         link.parent.mkdir(exist_ok=True, parents=True)
         if link.exists():
+            print("Link already exists, overriding")
             link.unlink()
 
         link.symlink_to(target.resolve())
@@ -32,6 +28,16 @@ def create_or_update_symlink(target, link):
         print(bcolors.FAIL + "Cannot create symlink\n" + str(exception) + bcolors.ENDC)
 
 
+symlink_targets = [
+    Path("root/home/user/.config/awesome"),
+    Path("root/home/user/.xinitrc"),
+    Path("root/home/user/.xonshrc")
+]
+
 print("Creating or updating symlinks...")
-for target, link in symlinks:
+for target in symlink_targets:
+    parts = target.parts
+    link = Path(str(target)
+                .replace("root/", "/")
+                .replace("/home/user", str(Path.home())))
     create_or_update_symlink(target, link)

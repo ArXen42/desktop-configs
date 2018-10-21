@@ -1,0 +1,10 @@
+# $AUTO_SUGGEST_IN_COMPLETIONS = '1'
+# source-bash "echo loading xonsh foreign shell"
+
+$VI_MODE = True
+
+xontrib load jedi whole_word_jumping prompt_ret_code 
+
+if 'STARTED_X' not in __xonsh__.env:
+    $STARTED_X = True
+    startx
