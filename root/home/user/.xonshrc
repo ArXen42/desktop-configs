@@ -1,6 +1,7 @@
 # $AUTO_SUGGEST_IN_COMPLETIONS = '1'
 # source-bash "echo loading xonsh foreign shell"
 
+$PATH=$PATH + ['/usr/bin/site_perl:/usr/bin/vendor_perl', '/usr/bin/core_perl'] 
 $VI_MODE = True
 
 xontrib load jedi whole_word_jumping prompt_ret_code 
